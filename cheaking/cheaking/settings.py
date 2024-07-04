@@ -74,13 +74,37 @@ WSGI_APPLICATION = 'cheaking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# import environ
+
+# env = environ.Env()
+# environ.Env.read_env()
+
+# environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'userinfo',
+        'USER': 'root',
+        'PASSWORD': 'santhosh',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
+print(f"DB_NAME: {env('DB_NAME')}")
+print(f"DB_USER: {env('DB_USER')}")
+print(f"DB_PASSWORD: {env('DB_PASSWORD')}")
+print(f"DB_HOST: {env('DB_HOST')}")
+print(f"DB_PORT: {env('DB_PORT')}")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
